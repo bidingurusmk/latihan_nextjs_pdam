@@ -1,5 +1,6 @@
 import { GetService } from "@/services/service";
 import Link from "next/link"
+import FormAddService from "./formAdd";
 
 const ServicesPage = async() => {
     const {data} = await GetService();
@@ -8,8 +9,8 @@ const ServicesPage = async() => {
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Admin Services</h1>    
             <p className=" mb-4">Manage your services here.</p>
-            <Link className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600" 
-            href="#">Tambah Service</Link>
+            <FormAddService label="Tambah Service" 
+            className="bg-blue-500 text-white px-4 py-2 rounded mb-4"/>
             <div className="grid grid-cols-5 gap-4 mt-4">
                 {data && data.map((service)=>(
                     <div key={service.id} className="border p-4 rounded shadow">

@@ -32,3 +32,27 @@ export const GetService = async (): Promise<ResponseData>=>{
         };  
     }
 }
+export const AddService = async (serviceData: {name: string, min_usage: number, max_usage: number, price: number}): Promise<ResponseData>=>{
+    try{
+        const token = await getServerCookie("token");   
+        const response = await axios.post(`${BASE_API_URL}/services`, serviceData,{
+            headers:{
+                "Content-Type": "application/json",
+                'app-key': `${APP_KEY}`,
+                'authorization': `Bearer ${token}`
+            }
+        } ) 
+        const data = response.data
+        return {
+            status: true,
+            message: "Service added successfully",
+            data: data.data
+        }
+    }
+    catch(error){
+        return {
+            status: false,      
+            message: "Failed to add service",
+        };
+    }
+}
